@@ -29,9 +29,8 @@ Aplikasi akuntansi pribadi berbasis **Laravel 12** dan **MySQL**, dengan otentik
 - Laravel 12
 - MySQL
 - Laravel Socialite (Google OAuth)
-- Tailwind CSS (jika pakai frontend Blade)
-- Prisma (opsional untuk portabilitas schema)
-  
+- **[Dashboard Mazer](https://mazer.io)**
+
 ## 🗄️ Struktur Database (Singkat)
 
 - `users`: informasi user dan role
