@@ -1,3 +1,54 @@
+# 📊 Personal Accounting App
+
+Aplikasi akuntansi pribadi berbasis **Laravel 12** dan **MySQL**, dengan otentikasi **Google OAuth**. Cocok untuk kebutuhan pencatatan keuangan pribadi, pengelolaan akun, kategori, transaksi, dan pembuatan laporan bulanan.
+
+## 🚀 Fitur Utama
+
+- 🔐 Login dengan Google (OAuth 2.0)
+- 👥 Manajemen user dengan 3 status: `owner`, `viewer`, dan `pending`
+- 💰 Manajemen akun (kas, bank, e-wallet, dll)
+- 🗂️ Kategori pengeluaran/pemasukan
+- 📒 Pencatatan transaksi harian
+- 🧮 Sisa saldo per akun
+- 📈 Laporan bulanan:
+  - Total pengeluaran per kategori
+  - Neraca per akun
+  - Budget vs aktual
+- 📝 Rencana anggaran per bulan per kategori
+
+## 🧠 Role & Akses
+
+| Role     | Akses                                       |
+|----------|---------------------------------------------|
+| owner    | Semua fitur                                 |
+| viewer   | Hanya akses halaman utama (`/`)             |
+| pending  | Tidak bisa akses, hanya redirect ke `/pending` |
+
+## 🛠️ Teknologi
+
+- Laravel 12
+- MySQL
+- Laravel Socialite (Google OAuth)
+- Tailwind CSS (jika pakai frontend Blade)
+- Prisma (opsional untuk portabilitas schema)
+  
+## 🗄️ Struktur Database (Singkat)
+
+- `users`: informasi user dan role
+- `accounts`: akun keuangan
+- `categories`: kategori transaksi
+- `transactions`: data pemasukan/pengeluaran
+- `monthly_budgets`: rencana anggaran bulanan
+
+## 🔧 Instalasi
+
+1. **Clone repo**
+   ```bash
+   git clone https://github.com/username/personal-accounting-app.git
+   cd personal-accounting-app
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
