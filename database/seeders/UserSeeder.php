@@ -29,6 +29,11 @@ class UserSeeder extends Seeder
             ]);
         User::factory()
             ->create([
+                'status' => 'COLLABORATOR',
+                'family_id' => $family->id,
+            ]);
+        User::factory()
+            ->create([
                 'status' => 'OWNER',
                 'family_id' => $family->id,
             ]);

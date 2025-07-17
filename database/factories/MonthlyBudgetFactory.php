@@ -18,13 +18,9 @@ class MonthlyBudgetFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::factory()->create();
-        $category = Category::factory()->create(['user_id' => $user->id]);
         return [
-            'user_id' => $user->id,
-            'category_id' => $category->id,
             'month' => $this->faker->numberBetween(1, 12),
-            'year' => $this->faker->year(),
+            'year' => $this->faker->numberBetween(2020, 2024),
             'amount' => $this->faker->randomFloat(2, 100000, 10000000),
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -13,8 +14,11 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
+        $user = User::where('status', 'OWNER')->first();
         Category::factory()
-            ->count(10)
-            ->create();
+            ->count(4)
+            ->create([
+                'user_id' => $user->id,
+            ]);
     }
 }

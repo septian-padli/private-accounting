@@ -19,13 +19,7 @@ class TransactionFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::factory()->create();
-        $account = Account::factory()->create(['user_id' => $user->id]);
-        $category = Category::factory()->create(['user_id' => $user->id]);
         return [
-            'user_id' => $user->id,
-            'account_id' => $account->id,
-            'category_id' => $category->id,
             'note' => $this->faker->sentence(3),
             'amount' => $this->faker->randomFloat(2, 1000, 100000),
             'transaction_date' => $this->faker->date(),
