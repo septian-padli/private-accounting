@@ -17,6 +17,8 @@
 		<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/app-dark.css') }}" />
 		<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/iconly.css') }}" />
 
+		{!! ToastMagic::styles() !!}
+
 		<link rel="stylesheet" href="{{ asset('assets/mazer/extensions/@fortawesome/fontawesome-free/css/all.min.css') }}">
 		<style>
 			.fontawesome-icons {
@@ -39,6 +41,7 @@
 		<script src="{{ asset('assets/mazer/static/js/initTheme.js') }}"></script>
 		@yield('sub-layout')
 
+		{!! ToastMagic::scripts() !!}
 		<script src="{{ asset('assets/mazer/static/js/components/dark.js') }}"></script>
 		<script src="{{ asset('assets/mazer/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 

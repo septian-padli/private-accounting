@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class SocialiteController extends Controller
 {
@@ -28,6 +29,7 @@ class SocialiteController extends Controller
                 'google_id' => $userFromGoogle->getId(),
                 'name' => $userFromGoogle->getName(),
                 'email' => $userFromGoogle->getEmail(),
+                'photo_profile' => $userFromGoogle->getAvatar(),
             ]);
 
             $newUser->save();
@@ -36,14 +38,15 @@ class SocialiteController extends Controller
             auth('web')->login($newUser);
             session()->regenerate();
 
-            return redirect('/');
+            return redirect()->route('pendingFamily');
         }
 
         // Jika ada user langsung login saja
         auth('web')->login($userFromDatabase);
         session()->regenerate();
 
-        return redirect('/');
+        ToastMagic::success('You have successfully logged in with Google!');
+        return redirect()->route('dashboard');
     }
 
     public function logout(Request $request)
@@ -52,6 +55,7 @@ class SocialiteController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        ToastMagic::success('You have successfully logged out!');
+        return redirect()->route('login');
     }
 }

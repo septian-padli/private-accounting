@@ -96,8 +96,8 @@
 				</li>
 				<li class="sidebar-item">
 					<a href="index.html" class="sidebar-link">
-						<i class="fa fa-user"></i>
-						<span>User</span>
+						<i class="fa fa-users-cog"></i>
+						<span>Family</span>
 					</a>
 				</li>
 
