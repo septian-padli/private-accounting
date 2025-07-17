@@ -16,6 +16,23 @@
 		<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/app.css') }}" />
 		<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/app-dark.css') }}" />
 		<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/iconly.css') }}" />
+
+		<link rel="stylesheet" href="{{ asset('assets/mazer/extensions/@fortawesome/fontawesome-free/css/all.min.css') }}">
+		<style>
+			.fontawesome-icons {
+				text-align: center;
+			}
+
+			article dl {
+				background-color: rgba(0, 0, 0, .02);
+				padding: 20px;
+			}
+
+			.fontawesome-icons .the-icon {
+				font-size: 24px;
+				line-height: 1.2;
+			}
+		</style>
 	</head>
 
 	<body>

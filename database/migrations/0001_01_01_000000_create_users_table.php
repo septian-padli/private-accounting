@@ -11,13 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
+        Schema::create('families', function (Blueprint $table) {
+            $table->ulid('id')->primary();
             $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->foreignUlid('family_id')->nullable()->constrained('families')->nullOnDelete();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('name');
             $table->string('google_id')->nullable();
+            $table->enum('status', ['OWNER', 'COLLABORATOR', 'VIEWER', 'PENDING'])->default('PENDING');
+            $table->string('photo_profile')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -46,5 +55,6 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('families');
     }
 };
