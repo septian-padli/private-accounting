@@ -10,7 +10,7 @@
 			</header>
 
 			<div class="page-heading">
-				<h3>Profile Statistics</h3>
+				<h3>@yield('page-title')</h3>
 			</div>
 			@yield('content')
 			<footer>

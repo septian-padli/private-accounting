@@ -3,7 +3,7 @@
 	<div id="auth">
 		<div class="d-flex justify-content-center align-items-center vh-100">
 
-			<div class="card w-50 shadow">
+			<div class="card w-lg-50 shadow">
 				<div class="card-body">
 					<h4 class="card-title text-capitalize text-center">Anda belum memiliki keuarga</h4>
 					<p class="mb-4 text-center">Tunggu hingga anda dimasukkan kedalam keluarga. Hubungi kepala keluarga anda.</p>

@@ -13,11 +13,19 @@ class DashboardController extends Controller
 {
     public function pendingFamily()
     {
+        $user = Auth::user();
+        if ($user->family_id) {
+            return redirect()->route('dashboard');
+        }
         return view('pages.starterPage.pendingFamily');
     }
 
     public function startFamily()
     {
+        $user = Auth::user();
+        if ($user->family_id) {
+            return redirect()->route('dashboard');
+        }
         return view('pages.starterPage.createFamily');
     }
 

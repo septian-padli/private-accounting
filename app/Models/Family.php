@@ -11,6 +11,9 @@ class Family extends Model
     /** @use HasFactory<\Database\Factories\FamilyFactory> */
     use HasFactory, HasUlids;
 
+    // table name
+    protected $table = 'families';
+
     protected $guarded = [];
 
     public function users()

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Family;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreFamilyRequest;
 use App\Http\Requests\UpdateFamilyRequest;
-use App\Models\Family;
 
 class FamilyController extends Controller
 {
@@ -13,7 +15,10 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        //
+        $family = Family::where('id', Auth::user()->family_id)
+            ->with('users')
+            ->first();
+        return view('pages.family.index', compact('family'));
     }
 
     /**

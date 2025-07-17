@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\CheckFamily;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
 
@@ -28,4 +29,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', CheckFamily::class])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/family', [FamilyController::class, 'index'])->name('family.index');
 });

@@ -95,7 +95,7 @@
 					</a>
 				</li>
 				<li class="sidebar-item">
-					<a href="index.html" class="sidebar-link">
+					<a href="{{ route('family.index') }}" class="sidebar-link">
 						<i class="fa fa-users-cog"></i>
 						<span>Family</span>
 					</a>

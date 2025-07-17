@@ -22,11 +22,6 @@ class CheckFamily
             return redirect()->route('pendingFamily');
         }
 
-        // jika ini adalah halaman pending-family, redirect ke dashboard
-        if ($user->family_id && $request->routeIs('pendingFamily')) {
-            return redirect()->route('dashboard');
-        }
-
         return $next($request);
     }
 }

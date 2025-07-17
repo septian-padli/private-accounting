@@ -1,4 +1,5 @@
 @extends('layout.dashboard-layout')
+@section('page-title', 'Dashboard')
 @section('content')
 	<div class="page-content">
 		<section class="row">
