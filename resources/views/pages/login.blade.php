@@ -2,7 +2,7 @@
 @section('sub-layout')
 	<div id="auth">
 		<div class="d-flex justify-content-center align-items-center vh-100">
-			<div class="card w-lg-25 shadow">
+			<div class="card w-25 shadow">
 				<div class="card-body">
 					<h4 class="card-title mb-4 text-center">Login To Accounting</h4>
 					<div class="d-grid">

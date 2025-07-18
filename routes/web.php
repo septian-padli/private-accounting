@@ -6,6 +6,10 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
 
+Route::get('/', function () {
+    return redirect()->route('dashboard');
+})->name('home');
+
 Route::middleware(['guest'])->group(function () {
     Route::prefix('auth')->group(function () {
         Route::get('google/redirect', [SocialiteController::class, 'redirect'])

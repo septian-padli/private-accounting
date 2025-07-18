@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Family;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreFamilyRequest;
@@ -13,11 +16,28 @@ class FamilyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $family = Family::where('id', Auth::user()->family_id)
-            ->with('users')
-            ->first();
+        if ($request->ajax()) {
+
+            $data = User::where('family_id', Auth::user()->family_id)
+                ->where('status', '!=', 'PENDING')
+                ->orderByRaw("FIELD(status, 'OWNER', 'COLLABORATOR', 'VIEWER', 'PENDING')")
+                ->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="{{javascript:void(0)}}" class="edit btn btn-primary btn-sm">View</a>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        $family = Family::where('id', Auth::user()->family_id)->first();
         return view('pages.family.index', compact('family'));
     }
 

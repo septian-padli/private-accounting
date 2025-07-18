@@ -1,4 +1,7 @@
 @extends('layout.layout')
+@section('styles')
+	@yield('styles')
+@endsection
 @section('sub-layout')
 	<div id="app">
 		@include('components.sidebar')
@@ -29,4 +32,7 @@
 			</footer>
 		</div>
 	</div>
+@endsection
+@section('scripts')
+	@yield('scripts')
 @endsection
