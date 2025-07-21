@@ -6,10 +6,12 @@ use App\Models\User;
 use App\Models\Family;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreFamilyRequest;
 use App\Http\Requests\UpdateFamilyRequest;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class FamilyController extends Controller
 {
@@ -46,15 +48,38 @@ class FamilyController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        if ($user->family_id) {
+            return redirect()->route('dashboard');
+        }
+        return view('pages.starterPage.createFamily');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFamilyRequest $request)
+    public function store(Request $request)
     {
-        //
+        // Validasi input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $user = Auth::user();
+
+        DB::transaction(function () use ($validated, $user) {
+            // Buat family baru
+            $family = Family::create([
+                'name' => $validated['name'],
+            ]);
+
+            $user->family_id = $family->id;
+            $user->status = 'OWNER';
+            $user->save();
+        });
+
+        ToastMagic::success('Family created successfully!');
+        return redirect()->route('dashboard');
     }
 
     /**

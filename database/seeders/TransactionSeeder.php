@@ -18,7 +18,7 @@ class TransactionSeeder extends Seeder
     {
         $user = User::where('status', 'OWNER')->first();
         $categories = Category::where('user_id', $user->id)->pluck('id');
-        $accounts = Account::where('user_id', $user->id)->pluck('id');
+        $accounts = Account::where('family_id', $user->family_id)->pluck('id');
 
         Transaction::factory()
             ->count(10)

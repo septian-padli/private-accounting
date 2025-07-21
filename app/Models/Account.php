@@ -21,4 +21,9 @@ class Account extends Model
     {
         return $this->hasMany(Transaction::class, 'account_id', 'id');
     }
+
+    public function family()
+    {
+        return $this->belongsTo(Family::class, 'family_id', 'id');
+    }
 }

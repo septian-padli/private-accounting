@@ -2,7 +2,9 @@
 
 use App\Http\Middleware\CheckFamily;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
 
@@ -27,12 +29,14 @@ Route::middleware(['auth'])->group(function () {
         ->name('auth.logout');
 
     Route::get('/pending-family', [DashboardController::class, 'pendingFamily'])->name('pendingFamily');
-    Route::get('/create-family', [DashboardController::class, 'startFamily'])->name('startFamily');
-    Route::post('/create-family', [DashboardController::class, 'createFamily'])->name('createFamily');
+    Route::get('/create-family', [FamilyController::class, 'create'])->name('startFamily');
+    Route::post('/create-family', [FamilyController::class, 'store'])->name('createFamily');
 });
 
 Route::middleware(['auth', CheckFamily::class])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/family', [FamilyController::class, 'index'])->name('family.index');
+
+    Route::get('/account', [AccountController::class, 'index'])->name('account.index');
 });

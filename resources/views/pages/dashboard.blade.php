@@ -325,3 +325,7 @@
 		</section>
 	</div>
 @endsection
+@section('scripts')
+	<script src="{{ asset('assets/mazer/extensions/apexcharts/apexcharts.min.js') }}"></script>
+	<script src="{{ asset('assets/mazer/static/js/pages/dashboard.js') }}"></script>
+@endsection

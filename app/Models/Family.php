@@ -20,4 +20,9 @@ class Family extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
 }

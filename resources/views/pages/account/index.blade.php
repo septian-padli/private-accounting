@@ -1,5 +1,5 @@
 @extends('layout.dashboard-layout')
-@section('page-title', 'Family Management')
+@section('page-title', 'Account Management')
 @section('content')
 	<div class="page-content">
 		<section class="row">
@@ -7,12 +7,13 @@
 				<div class="card">
 					<div class="card-body py-4-5 px-4">
 						<div class="d-flex flex-column flex-md-row justify-content-between mb-4">
-							<h4 class="text-capitalize mb-md-0 mb-2">{{ $family->name }} Members</h4>
+							<h4 class="text-capitalize mb-md-0 mb-2">{{ $family->name }} Accounts</h4>
 							<div>
-								<a href="#" class="edit btn btn-primary btn-sm">
+								<button type="button" class="edit btn btn-primary btn-sm" data-bs-toggle="modal"
+									data-bs-target="#createAccountModal">
 									<i class="fa fa-user-plus me-2"></i>
-									Add Member
-								</a>
+									Add Account
+								</button>
 							</div>
 						</div>
 						<table class="data-table w-100 table">
@@ -20,8 +21,7 @@
 								<tr>
 									<th>No</th>
 									<th>Name</th>
-									<th>Email</th>
-									<th>Status</th>
+									<th>Balance</th>
 									<th width="100px">Action</th>
 								</tr>
 							</thead>
@@ -34,6 +34,9 @@
 			</div>
 		</section>
 	</div>
+
+	{{-- panggil livewire nya --}}
+	@livewire('account.create-account')
 @endsection
 
 @section('styles')
@@ -68,7 +71,7 @@
 			var table = $('.data-table').DataTable({
 				processing: true,
 				serverSide: true,
-				ajax: "{{ route('family.index') }}",
+				ajax: "{{ route('account.index') }}",
 				scrollX: true,
 				responsive: true,
 				columns: [{
@@ -82,20 +85,8 @@
 						name: 'name'
 					},
 					{
-						data: 'email',
-						name: 'email'
-					},
-					{
-						data: 'status',
-						name: 'status',
-						searchable: false,
-						render: function(data, type, row) {
-							return data
-								.split(' ')
-								.map(word => word.charAt(0).toUpperCase() + word.slice(1)
-									.toLowerCase())
-								.join(' ');
-						}
+						data: 'balance',
+						name: 'balance'
 					},
 					{
 						data: 'action',
@@ -106,10 +97,27 @@
 				]
 			});
 
+			window.addEventListener('accountCreated', function() {
+				table.ajax.reload(null, false);
+			});
 		});
 
 		document.querySelectorAll('.dataTables_paginate .pagination').forEach(dt => {
 			dt.classList.add('pagination-primary')
 		})
+	</script>
+
+	<script>
+		window.addEventListener('close-modal', () => {
+			// Ambil modal instance, jika belum ada buat baru
+			let modalEl = document.getElementById('createAccountModal');
+			let modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+			modal.hide();
+
+			// Hilangkan backdrop secara paksa jika masih ada
+			document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+			document.body.classList.remove('modal-open');
+			document.body.style = '';
+		});
 	</script>
 @endsection

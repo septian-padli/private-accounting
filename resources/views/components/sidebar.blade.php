@@ -88,8 +88,8 @@
 						<span>Category</span>
 					</a>
 				</li>
-				<li class="sidebar-item">
-					<a href="index.html" class="sidebar-link">
+				<li class="sidebar-item {{ request()->is('account') ? 'active' : '' }}">
+					<a href="{{ route('account.index') }}" class="sidebar-link">
 						<i class="fa fa-university"></i>
 						<span>Account</span>
 					</a>

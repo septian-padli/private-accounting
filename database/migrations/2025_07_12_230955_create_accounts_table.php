@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('family_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->integer('balance')->default(0);
             $table->timestamps();
         });
     }

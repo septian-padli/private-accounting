@@ -20,39 +20,6 @@ class DashboardController extends Controller
         return view('pages.starterPage.pendingFamily');
     }
 
-    public function startFamily()
-    {
-        $user = Auth::user();
-        if ($user->family_id) {
-            return redirect()->route('dashboard');
-        }
-        return view('pages.starterPage.createFamily');
-    }
-
-    public function createFamily(Request $request)
-    {
-        // Validasi input
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $user = Auth::user();
-
-        DB::transaction(function () use ($validated, $user) {
-            // Buat family baru
-            $family = Family::create([
-                'name' => $validated['name'],
-            ]);
-
-            $user->family_id = $family->id;
-            $user->status = 'OWNER';
-            $user->save();
-        });
-
-        ToastMagic::success('Family created successfully!');
-        return redirect()->route('dashboard');
-    }
-
     public function index()
     {
         return view('pages.dashboard');
