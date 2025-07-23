@@ -21,6 +21,7 @@
 								<tr>
 									<th>No</th>
 									<th>Name</th>
+									<th>Number</th>
 									<th>Balance</th>
 									<th width="100px">Action</th>
 								</tr>
@@ -43,6 +44,7 @@
 	<link rel="stylesheet"
 		href="{{ asset('assets/mazer/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" />
 	<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/table-datatable-jquery.css') }}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 	<style>
 		@media (max-width: 767.98px) {
 
@@ -65,6 +67,7 @@
 	<script src="{{ asset('assets/mazer/extensions/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('assets/mazer/extensions/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('assets/mazer/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 	<script type="text/javascript">
 		$(function() {
@@ -83,6 +86,10 @@
 					{
 						data: 'name',
 						name: 'name'
+					},
+					{
+						data: 'number',
+						name: 'number'
 					},
 					{
 						data: 'balance',

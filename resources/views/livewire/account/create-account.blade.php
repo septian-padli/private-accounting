@@ -11,8 +11,16 @@
 					<div class="mb-3">
 						<label for="accountName">Name</label>
 						<input wire:model="name" type="text" class="form-control" id="accountName" placeholder="Enter account name"
-							autofocus>
+							autofocus required>
 						@error('name')
+							<span class="text-danger">{{ $message }}</span>
+						@enderror
+					</div>
+					<div class="mb-3">
+						<label for="accountNumber">Account Number</label>
+						<input wire:model="number" type="text" class="form-control" id="accountNumber"
+							placeholder="Enter account number" required>
+						@error('number')
 							<span class="text-danger">{{ $message }}</span>
 						@enderror
 					</div>
@@ -21,7 +29,7 @@
 						<div class="input-group mb-3">
 							<span class="input-group-text" id="basic-addon1">Rp.</span>
 							<input wire:model="balance" type="number" class="form-control" id="accountBalance" placeholder="Enter balance"
-								aria-label="Balance" aria-describedby="basic-addon1">
+								aria-label="Balance" aria-describedby="basic-addon1" required>
 						</div>
 						@error('balance')
 							<span class="text-danger">{{ $message }}</span>

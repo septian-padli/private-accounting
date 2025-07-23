@@ -12,7 +12,8 @@
 						@csrf
 						<div class="form-group">
 							<label for="name" class="mb-1">Nama Keluarga</label>
-							<input type="text" name="name" id="name" class="form-control round" placeholder="Nama Keluarga">
+							<input type="text" name="name" id="name" class="form-control round" placeholder="Nama Keluarga"
+								autofocus required>
 						</div>
 						<div class="d-flex w-100 flex-row-reverse gap-2">
 							<button type="submit" class="btn btn-primary">

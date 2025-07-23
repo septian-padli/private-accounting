@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->foreignUlid('family_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('number')->unique();
             $table->integer('balance')->default(0);
             $table->timestamps();
         });

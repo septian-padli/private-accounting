@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,10 @@ class AccountFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->unique()->company();
         return [
-            'name' => $this->faker->company(),
+            'name' => $name,
+            'number' => $this->faker->unique()->bankAccountNumber(),
         ];
     }
 }
