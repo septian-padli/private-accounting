@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
 
@@ -39,4 +40,6 @@ Route::middleware(['auth', CheckFamily::class])->group(function () {
     Route::get('/family', [FamilyController::class, 'index'])->name('family.index');
 
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
+
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 });

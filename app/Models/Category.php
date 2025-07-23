@@ -12,9 +12,9 @@ class Category extends Model
     use HasFactory, HasUlids;
     protected $guarded = [];
 
-    public function user()
+    public function family()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Family::class, 'family_id', 'id');
     }
 
     public function transactions()

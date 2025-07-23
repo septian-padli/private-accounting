@@ -15,7 +15,12 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $family = Family::factory()
-            ->create();
+            ->create([]);
+
+        $familyOther = Family::factory()
+            ->create([
+                'name' => 'Septian Family',
+            ]);
 
         User::factory()
             ->create([
@@ -36,6 +41,15 @@ class UserSeeder extends Seeder
             ->create([
                 'status' => 'OWNER',
                 'family_id' => $family->id,
+            ]);
+        User::factory()
+            ->create([
+                'email' => 'm.septianpadli@gmail.com',
+                'name' => 'Septian Padli',
+                'google_id' => '102037582963265230781',
+                'photo_profile' => 'https://lh3.googleusercontent.com/a/ACg8ocLV7nlmKmESPRat0mjuI1pLl-V2NaoaQ-S3K1tm71oPUEV89aM=s96-c',
+                'status' => 'OWNER',
+                'family_id' => $familyOther->id,
             ]);
     }
 }

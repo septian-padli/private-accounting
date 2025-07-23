@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
         Category::factory()
             ->count(4)
             ->create([
-                'user_id' => $user->id,
+                'family_id' => $user->family_id,
             ]);
     }
 }

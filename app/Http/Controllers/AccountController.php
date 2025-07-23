@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Family;
 use App\Models\Account;
 use Illuminate\Http\Request;
@@ -20,7 +19,6 @@ class AccountController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $family = Family::where('id', $user->family_id)->first();
 
         if ($request->ajax()) {
 
@@ -40,7 +38,7 @@ class AccountController extends Controller
                 ->make(true);
         }
 
-        return view('pages.account.index', compact('family', 'user'));
+        return view('pages.account.index', compact('user'));
     }
 
     /**

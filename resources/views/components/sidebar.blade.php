@@ -82,8 +82,8 @@
 				</li>
 
 				<li class="sidebar-title">Settings</li>
-				<li class="sidebar-item">
-					<a href="index.html" class="sidebar-link">
+				<li class="sidebar-item {{ request()->is('category') ? 'active' : '' }}">
+					<a href="{{ route('category.index') }}" class="sidebar-link">
 						<i class="fa fa-tags"></i>
 						<span>Category</span>
 					</a>

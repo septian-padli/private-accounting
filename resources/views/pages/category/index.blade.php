@@ -1,5 +1,5 @@
 @extends('layout.dashboard-layout')
-@section('page-title', 'Account Management')
+@section('page-title', 'Category Management')
 @section('content')
 	<div class="page-content">
 		<section class="row">
@@ -7,12 +7,12 @@
 				<div class="card">
 					<div class="card-body py-4-5 px-4">
 						<div class="d-flex flex-column flex-md-row justify-content-between mb-4">
-							<h4 class="text-capitalize mb-md-0 mb-2">{{ $user->family->name }} Accounts</h4>
+							<h4 class="text-capitalize mb-md-0 mb-2">{{ $user->family->name }} Category</h4>
 							<div>
 								<button type="button" class="edit btn btn-primary btn-sm" data-bs-toggle="modal"
-									data-bs-target="#createAccountModal">
+									data-bs-target="#createCategoryModal">
 									<i class="fa fa-user-plus me-2"></i>
-									Add Account
+									Add Category
 								</button>
 							</div>
 						</div>
@@ -21,8 +21,7 @@
 								<tr>
 									<th>No</th>
 									<th>Name</th>
-									<th>Number</th>
-									<th>Balance</th>
+									<th>Type</th>
 									<th width="100px">Action</th>
 								</tr>
 							</thead>
@@ -37,7 +36,7 @@
 	</div>
 
 	{{-- panggil livewire nya --}}
-	@livewire('account.create-account')
+	@livewire('category.create-category')
 @endsection
 
 @section('styles')
@@ -74,7 +73,7 @@
 			var table = $('.data-table').DataTable({
 				processing: true,
 				serverSide: true,
-				ajax: "{{ route('account.index') }}",
+				ajax: "{{ route('category.index') }}",
 				scrollX: true,
 				responsive: true,
 				columns: [{
@@ -88,12 +87,8 @@
 						name: 'name'
 					},
 					{
-						data: 'number',
-						name: 'number'
-					},
-					{
-						data: 'balance',
-						name: 'balance'
+						data: 'type',
+						name: 'type'
 					},
 					{
 						data: 'action',
@@ -104,7 +99,7 @@
 				]
 			});
 
-			window.addEventListener('accountCreated', function() {
+			window.addEventListener('categoryCreated', function() {
 				table.ajax.reload(null, false);
 			});
 		});
@@ -117,7 +112,7 @@
 	<script>
 		window.addEventListener('close-modal', () => {
 			// Ambil modal instance, jika belum ada buat baru
-			let modalEl = document.getElementById('createAccountModal');
+			let modalEl = document.getElementById('createCategoryModal');
 			let modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
 			modal.hide();
 
