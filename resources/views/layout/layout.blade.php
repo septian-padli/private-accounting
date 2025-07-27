@@ -18,6 +18,7 @@
 		<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/app.css') }}" />
 		<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/app-dark.css') }}" />
 		<link rel="stylesheet" crossorigin href="{{ asset('assets/mazer/compiled/css/iconly.css') }}" />
+
 		@yield('styles')
 
 		{!! ToastMagic::styles() !!}
@@ -42,17 +43,16 @@
 
 	<body>
 		<script src="{{ asset('assets/mazer/static/js/initTheme.js') }}"></script>
+
 		@yield('sub-layout')
 
 		{!! ToastMagic::scripts() !!}
-
 		@livewireScripts()
-
 		<script src="{{ asset('assets/mazer/static/js/components/dark.js') }}"></script>
 		<script src="{{ asset('assets/mazer/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 		<script src="{{ asset('assets/mazer/compiled/js/app.js') }}"></script>
+		<script src="{{ asset('assets/js/utils.js') }}"></script>
 		@yield('scripts')
-
 	</body>
 
 </html>

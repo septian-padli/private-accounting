@@ -31,6 +31,9 @@ class TransactionController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('user', function ($row) {
+                    return $row->user ? $row->user->name : '-';
+                })
                 ->addColumn('category', function ($row) {
                     return $row->category ? $row->category->name : '-';
                 })
@@ -67,6 +70,9 @@ class TransactionController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('user', function ($row) {
+                    return $row->user ? $row->user->name : '-';
+                })
                 ->addColumn('category', function ($row) {
                     return $row->category ? $row->category->name : '-';
                 })

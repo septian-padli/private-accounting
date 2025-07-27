@@ -20,6 +20,7 @@
 							<thead>
 								<tr>
 									<th>Date</th>
+									<th>User</th>
 									<th>Category</th>
 									<th>Account</th>
 									<th>Amount</th>
@@ -81,9 +82,17 @@
 				ajax: "{{ route('cashout.index') }}",
 				scrollX: true,
 				responsive: true,
+				lengthMenu: [30, 50, 100],
 				columns: [{
 						data: 'transaction_date',
-						name: 'transaction_date'
+						name: 'transaction_date',
+						render: function(data, type, row) {
+							return convertDate(data, type, row);
+						}
+					},
+					{
+						data: 'user',
+						name: 'user',
 					},
 					{
 						data: 'category',
@@ -118,19 +127,19 @@
 			});
 		});
 
-		document.querySelectorAll('.dataTables_paginate .pagination').forEach(dt => {
-			dt.classList.add('pagination-primary')
-		})
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelectorAll('.dataTables_paginate .pagination').forEach(dt => {
+				dt.classList.add('pagination-primary')
+			});
+		});
 	</script>
 
 	<script>
 		window.addEventListener('close-modal', () => {
-			// Ambil modal instance, jika belum ada buat baru
 			let modalEl = document.getElementById('createTransactionModal');
 			let modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
 			modal.hide();
 
-			// Hilangkan backdrop secara paksa jika masih ada
 			document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
 			document.body.classList.remove('modal-open');
 			document.body.style = '';
