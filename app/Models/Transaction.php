@@ -26,4 +26,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
+    public function family()
+    {
+        return $this->belongsTo(Family::class, 'family_id', 'id');
+    }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->foreignUlid('family_id')->constrained()->onDelete('cascade');
             $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
             $table->foreignUlid('account_id')->constrained()->onDelete('cascade');
             $table->foreignUlid('category_id')->constrained()->onDelete('cascade');

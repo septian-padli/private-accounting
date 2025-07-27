@@ -2,65 +2,87 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
+use Carbon\Carbon;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function cashout(Request $request)
     {
-        //
+        $today = Carbon::now()->format('Y-m-d');
+        $user = Auth::user();
+        $typeTransaction = 'EXPENSE';
+        if ($request->ajax()) {
+
+            $data = Transaction::with(['category', 'account'])
+                ->where('family_id', $user->family_id)
+                ->whereHas('category', function ($q) {
+                    $q->where('type', 'EXPENSE');
+                })
+                ->orderBy('transaction_date', 'desc')
+                ->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('category', function ($row) {
+                    return $row->category ? $row->category->name : '-';
+                })
+                ->addColumn('account', function ($row) {
+                    return $row->account ? $row->account->name : '-';
+                })
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('pages.transaction.cashout.index', compact('user', 'today', 'typeTransaction'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function cashin(Request $request)
     {
-        //
-    }
+        $today = Carbon::now()->format('Y-m-d');
+        $user = Auth::user();
+        $typeTransaction = 'INCOME';
+        if ($request->ajax()) {
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTransactionRequest $request)
-    {
-        //
-    }
+            $data = Transaction::with(['category', 'account'])
+                ->where('family_id', $user->family_id)
+                ->whereHas('category', function ($q) {
+                    $q->where('type', 'INCOME');
+                })
+                ->orderBy('transaction_date', 'desc')
+                ->get();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Transaction $transaction)
-    {
-        //
-    }
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('category', function ($row) {
+                    return $row->category ? $row->category->name : '-';
+                })
+                ->addColumn('account', function ($row) {
+                    return $row->account ? $row->account->name : '-';
+                })
+                ->addColumn('action', function ($row) {
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>';
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateTransactionRequest $request, Transaction $transaction)
-    {
-        //
-    }
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Transaction $transaction)
-    {
-        //
+        return view('pages.transaction.cashin.index', compact('user', 'today', 'typeTransaction'));
     }
 }

@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('status', 'OWNER')->first();
+        $user = User::where('status', 'OWNER')->whereNull('google_id')->first();
         Category::factory()
             ->count(4)
             ->create([

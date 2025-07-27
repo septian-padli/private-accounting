@@ -16,13 +16,14 @@ class TransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('status', 'OWNER')->first();
+        $user = User::where('status', 'OWNER')->whereNull('google_id')->first();
         $categories = Category::where('family_id', $user->family_id)->pluck('id');
         $accounts = Account::where('family_id', $user->family_id)->pluck('id');
 
         Transaction::factory()
             ->count(10)
             ->create([
+                'family_id' => $user->family_id,
                 'user_id' => $user->id,
                 'account_id' => $accounts->random(),
                 'category_id' => $categories->random(),

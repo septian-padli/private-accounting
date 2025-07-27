@@ -15,7 +15,8 @@ class MonthlyBudgetSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('status', 'OWNER')->first();
+        $user = User::where('status', 'OWNER')->whereNull('google_id')->first();
+
         $categories = Category::where('family_id', $user->family_id)->pluck('id');
         MonthlyBudget::factory()
             ->count(12)

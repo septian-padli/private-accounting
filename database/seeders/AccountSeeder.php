@@ -15,11 +15,11 @@ class AccountSeeder extends Seeder
      */
     public function run(): void
     {
-        $family = Family::inRandomOrder()->first();
+        $user = User::where('status', 'OWNER')->whereNull('google_id')->first();
         Account::factory()
             ->count(2)
             ->create([
-                'family_id' => $family->id,
+                'family_id' => $user->family_id,
             ]);
     }
 }

@@ -49,11 +49,19 @@
 						<span>Dashboard</span>
 					</a>
 				</li>
-				<li class="sidebar-item">
-					<a href="index.html" class="sidebar-link">
-						<i class="fa fa-exchange-alt"></i>
+				<li class="sidebar-item has-sub {{ request()->is('cashout') || request()->is('cashin') ? 'active' : '' }}">
+					<a href="#" class="sidebar-link">
+						<i class="fa fa-chart-bar"></i>
 						<span>Transaction</span>
 					</a>
+					<ul class="submenu {{ request()->is('cashout') || request()->is('cashin') ? 'active' : '' }}">
+						<li class="submenu-item {{ request()->is('cashout') ? 'active' : '' }}">
+							<a href="{{ route('cashout.index') }}" class="submenu-link">Cash Out</a>
+						</li>
+						<li class="submenu-item {{ request()->is('cashin') ? 'active' : '' }}">
+							<a href="{{ route('cashin.index') }}" class="submenu-link">Cash In</a>
+						</li>
+					</ul>
 				</li>
 				<li class="sidebar-item">
 					<a href="index.html" class="sidebar-link">
