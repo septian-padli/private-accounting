@@ -63,6 +63,7 @@ class CreateTransaction extends Component
                 'note' => $this->note,
                 'amount' => $this->amount,
                 'transaction_date' => $this->transaction_date,
+                'type' => $this->typeTransaction,
             ]);
 
             if ($this->typeTransaction === 'INCOME') {
@@ -83,7 +84,6 @@ class CreateTransaction extends Component
         $accounts = Account::where('family_id', Auth::user()->family_id)->get();
         $categories = Category::where('family_id', Auth::user()->family_id)
             ->where('type', $this->typeTransaction)
-            ->whereRaw('LOWER(name) != ?', ['initial balance'])
             ->get();
         return view('livewire.transaction.create-transaction', compact('accounts', 'categories'));
     }

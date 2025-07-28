@@ -11,7 +11,12 @@
 					<div class="card-body py-4-5 px-4">
 						<div class="d-flex flex-column flex-md-row justify-content-between mb-4">
 							<h4 class="text-capitalize mb-md-0 mb-2">{{ $user->family->name }} Transactions</h4>
-							<div>
+							<div class="d-flex justify-content-end gap-2">
+								<button type="button" class="edit btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+									data-bs-target="#internalTransferModal">
+									<i class="fa fa-exchange-alt me-2"></i>
+									Internal Transfer
+								</button>
 								<button type="button" class="edit btn btn-primary btn-sm" data-bs-toggle="modal"
 									data-bs-target="#createTransactionModal">
 									<i class="fa fa-user-plus me-2"></i>
@@ -43,6 +48,7 @@
 
 	{{-- panggil livewire nya --}}
 	@livewire('transaction.create-transaction', ['today' => $today, 'typeTransaction' => $typeTransaction])
+	@livewire('transaction.internal-transfer', ['today' => $today])
 @endsection
 
 @section('styles')
@@ -109,7 +115,11 @@
 						data: 'amount',
 						name: 'amount',
 						render: function(data, type, row) {
-							return 'Rp ' + parseInt(data).toLocaleString('id-ID');
+							if (row.category === 'Internal Transfer') {
+								return '+Rp ' + parseInt(data).toLocaleString('id-ID');
+							}
+							return '<span class="text-success fw-semibold">+Rp ' + parseInt(data)
+								.toLocaleString('id-ID') + '</span>';
 						}
 					},
 					{

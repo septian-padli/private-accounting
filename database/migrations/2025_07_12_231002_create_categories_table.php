@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->foreignUlid('family_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->enum('type', ['INCOME', 'EXPENSE']);
+            $table->enum('type', ['INCOME', 'EXPENSE'])->nullable();
             $table->string('icon')->nullable();
             $table->timestamps();
         });

@@ -23,6 +23,7 @@ class TransactionFactory extends Factory
             'note' => $this->faker->sentence(3),
             'amount' => $this->faker->randomFloat(2, 1000, 100000),
             'transaction_date' => $this->faker->date(),
+            'type' => $this->faker->randomElement(['INCOME', 'EXPENSE']),
         ];
     }
 }

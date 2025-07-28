@@ -27,7 +27,12 @@ class CategorySeeder extends Seeder
                 [
                     'family_id' => $padli->family_id,
                     'name' => 'Initial Balance',
-                    'type' => 'INCOME',
+                    'type' => null,
+                ],
+                [
+                    'family_id' => $padli->family_id,
+                    'name' => 'Internal Transfer',
+                    'type' => null,
                 ],
                 [
                     'family_id' => $padli->family_id,

@@ -23,10 +23,9 @@ class TransactionController extends Controller
 
             $data = Transaction::with(['category', 'account'])
                 ->where('family_id', $user->family_id)
-                ->whereHas('category', function ($q) use ($typeTransaction) {
-                    $q->where('type', $typeTransaction);
-                })
+                ->where('type', $typeTransaction)
                 ->orderBy('transaction_date', 'desc')
+                ->orderBy('created_at', 'desc')
                 ->get();
 
             return DataTables::of($data)
@@ -62,10 +61,9 @@ class TransactionController extends Controller
 
             $data = Transaction::with(['category', 'account'])
                 ->where('family_id', $user->family_id)
-                ->whereHas('category', function ($q) use ($typeTransaction) {
-                    $q->where('type', $typeTransaction);
-                })
+                ->where('type', $typeTransaction)
                 ->orderBy('transaction_date', 'desc')
+                ->orderBy('created_at', 'desc')
                 ->get();
 
             return DataTables::of($data)

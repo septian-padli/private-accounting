@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('note')->nullable();
             $table->decimal('amount', 15, 2);
             $table->date('transaction_date');
+            $table->enum('type', ['INCOME', 'EXPENSE']);
             $table->timestamps();
         });
     }
