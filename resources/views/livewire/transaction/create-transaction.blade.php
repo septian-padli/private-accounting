@@ -37,7 +37,6 @@
 									<option value="{{ $acc->id }}">{{ $acc->name }}</option>
 								@endforeach
 							</select>
-							<p class="text-sm">Account id: {{ $account_id }}</p>
 							@error('account_id')
 								<span class="text-danger text-sm">{{ $message }}</span>
 							@enderror
