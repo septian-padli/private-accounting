@@ -6,26 +6,47 @@ use App\Models\Account;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Transaction;
+use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class CreateTransaction extends Component
 {
-    public $transaction_date, $category_id, $account_id, $amount, $note, $today, $typeTransaction;
-
-    protected $rules = [
-        'transaction_date' => 'required|date',
-        'category_id' => 'required|exists:categories,id',
-        'account_id' => 'required|exists:accounts,id',
-        'amount' => 'required|numeric',
-        'note' => 'nullable|string|max:255',
-    ];
+    #[Validate('required|date')]
+    public $transaction_date;
+    #[Validate('required|exists:categories,id')]
+    public $category_id;
+    #[Validate('required|exists:accounts,id')]
+    public $account_id;
+    #[Validate('nullable|string|max:255')]
+    public $note;
+    #[Validate('required|numeric|min:5')]
+    public $amount;
+    public $today;
+    public $typeTransaction;
+    public $accountBalance = null;
 
     public function mount($today = null)
     {
         $this->today = $today ?? now()->format('Y-m-d');
         if (!$this->transaction_date) {
             $this->transaction_date = $this->today;
+        }
+    }
+
+    public function updatedAccountId()
+    {
+        $this->accountBalance = Account::find($this->account_id)->balance;
+        if ($this->accountBalance < $this->amount && $this->typeTransaction === 'EXPENSE') {
+            // berikan error kepada amount
+            $this->addError('amount', 'Saldo tidak cukup.');
+        }
+    }
+
+    public function updatedAmount()
+    {
+        if ($this->amount > 0 && $this->accountBalance < $this->amount && $this->typeTransaction === 'EXPENSE') {
+            $this->addError('amount', 'Saldo tidak cukup.');
         }
     }
 
@@ -43,8 +64,14 @@ class CreateTransaction extends Component
                 'amount' => $this->amount,
                 'transaction_date' => $this->transaction_date,
             ]);
-            Account::where('id', $this->account_id)
-                ->increment('balance', $this->amount);
+
+            if ($this->typeTransaction === 'INCOME') {
+                Account::where('id', $this->account_id)
+                    ->increment('balance', $this->amount);
+            } else {
+                Account::where('id', $this->account_id)
+                    ->decrement('balance', $this->amount);
+            }
         });
         $this->dispatch('transactionCreated');
         $this->reset(['transaction_date', 'category_id', 'account_id', 'amount', 'note']);

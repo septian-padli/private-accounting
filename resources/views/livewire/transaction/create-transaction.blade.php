@@ -14,7 +14,7 @@
 							<input wire:model="transaction_date" type="date" class="form-control" id="transactionDate" required
 								value="{{ $today }}">
 							@error('transaction_date')
-								<span class="text-danger">{{ $message }}</span>
+								<span class="text-danger text-sm">{{ $message }}</span>
 							@enderror
 						</div>
 						<div class="col-md-6 col-12">
@@ -26,32 +26,33 @@
 								@endforeach
 							</select>
 							@error('category_id')
-								<span class="text-danger">{{ $message }}</span>
+								<span class="text-danger text-sm">{{ $message }}</span>
 							@enderror
 						</div>
 						<div class="col-md-6 col-12">
 							<label for="accountSelect">Account</label>
-							<select wire:model="account_id" class="form-control form-select" id="accountSelect" required>
+							<select wire:model.live="account_id" class="form-control form-select" id="accountSelect" required>
 								<option value="">Select account</option>
 								@foreach ($accounts as $acc)
 									<option value="{{ $acc->id }}">{{ $acc->name }}</option>
 								@endforeach
 							</select>
+							<p class="text-sm">Account id: {{ $account_id }}</p>
 							@error('account_id')
-								<span class="text-danger">{{ $message }}</span>
+								<span class="text-danger text-sm">{{ $message }}</span>
 							@enderror
 						</div>
 						<div class="col-md-6 col-12">
 							<label for="amountInput">Amount</label>
-							<div class="form-group position-relative has-icon-left">
-								<input wire:model="amount" type="number" class="form-control" placeholder="Input with icon left"
+							<div class="form-group position-relative has-icon-left mb-0">
+								<input wire:model.blur="amount" type="number" class="form-control" placeholder="Input with icon left"
 									id="amountInput" required>
 								<div class="form-control-icon">
 									<i class="fa-solid fa-rupiah-sign"></i>
 								</div>
 							</div>
 							@error('amount')
-								<span class="text-danger">{{ $message }}</span>
+								<span class="text-danger text-sm">{{ $message }}</span>
 							@enderror
 						</div>
 
@@ -59,14 +60,14 @@
 							<label for="noteInput">Note</label>
 							<input wire:model="note" type="text" class="form-control" id="noteInput" placeholder="Note (optional)">
 							@error('note')
-								<span class="text-danger">{{ $message }}</span>
+								<span class="text-danger text-sm">{{ $message }}</span>
 							@enderror
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save</button>
+					<button type="submit" class="btn btn-primary" @if ($errors->any()) disabled @endif>Save</button>
 				</div>
 			</form>
 		</div>
