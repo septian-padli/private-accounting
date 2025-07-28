@@ -93,7 +93,10 @@
 					},
 					{
 						data: 'balance',
-						name: 'balance'
+						name: 'balance',
+						render: function(data, type, row) {
+							return 'Rp ' + parseInt(data).toLocaleString('id-ID');
+						}
 					},
 					{
 						data: 'action',

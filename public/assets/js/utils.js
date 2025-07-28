@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
-        console.log("tooltip berjalan")
     }, false);
 
 function convertDate(data, type, row) {

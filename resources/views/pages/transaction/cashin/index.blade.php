@@ -4,6 +4,9 @@
 	<div class="page-content">
 		<section class="row">
 			<div class="col-12">
+				@livewire('account-balance')
+			</div>
+			<div class="col-12">
 				<div class="card">
 					<div class="card-body py-4-5 px-4">
 						<div class="d-flex flex-column flex-md-row justify-content-between mb-4">

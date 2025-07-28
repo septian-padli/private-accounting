@@ -20,5 +20,30 @@ class CategorySeeder extends Seeder
             ->create([
                 'family_id' => $user->family_id,
             ]);
+
+        $padli = User::where('email', 'm.septianpadli@gmail.com')->first();
+        Category::factory()
+            ->createMany([
+                [
+                    'family_id' => $padli->family_id,
+                    'name' => 'Initial Balance',
+                    'type' => 'INCOME',
+                ],
+                [
+                    'family_id' => $padli->family_id,
+                    'name' => 'Food',
+                    'type' => 'EXPENSE',
+                ],
+                [
+                    'family_id' => $padli->family_id,
+                    'name' => 'Transport',
+                    'type' => 'EXPENSE',
+                ],
+                [
+                    'family_id' => $padli->family_id,
+                    'name' => 'Salary',
+                    'type' => 'INCOME',
+                ],
+            ]);
     }
 }

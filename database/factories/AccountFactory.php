@@ -22,6 +22,7 @@ class AccountFactory extends Factory
         return [
             'name' => $name,
             'number' => $this->faker->unique()->bankAccountNumber(),
+            'icon' => $this->faker->randomElement(['💴', '💰', '🏦', '💳', '🪙', '📈', '🤑', '💵', '💸']),
         ];
     }
 }

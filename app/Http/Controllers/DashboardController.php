@@ -22,6 +22,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('pages.dashboard');
+        $user = Auth::user();
+        $accounts = $user->family->accounts()->with('transactions')->get();
+        return view('pages.dashboard', compact('accounts'));
     }
 }

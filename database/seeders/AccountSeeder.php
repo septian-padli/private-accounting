@@ -21,5 +21,22 @@ class AccountSeeder extends Seeder
             ->create([
                 'family_id' => $user->family_id,
             ]);
+
+        $padli = User::where('email', 'm.septianpadli@gmail.com')->first();
+        Account::factory()
+            ->createMany([
+                [
+                    'family_id' => $padli->family_id,
+                    'name' => 'BCA',
+                ],
+                [
+                    'family_id' => $padli->family_id,
+                    'name' => 'BRI',
+                ],
+                [
+                    'family_id' => $padli->family_id,
+                    'name' => 'Cash',
+                ],
+            ]);
     }
 }

@@ -1,6 +1,6 @@
 <div>
 	<!-- Modal -->
-	<div class="modal fade" id="createAccountModal" tabindex="-1" aria-hidden="true">
+	<div class="modal fade" id="createAccountModal" tabindex="-1" aria-hidden="true" wire:ignore.self>
 		<div class="modal-dialog modal-dialog-centered">
 			<form wire:submit.prevent="save" class="modal-content">
 				<div class="modal-header">
@@ -29,9 +29,17 @@
 						<div class="input-group mb-3">
 							<span class="input-group-text" id="basic-addon1">Rp.</span>
 							<input wire:model="balance" type="number" class="form-control" id="accountBalance" placeholder="Enter balance"
-								aria-label="Balance" aria-describedby="basic-addon1" required>
+								aria-label="Balance" aria-describedby="basic-addon1">
 						</div>
 						@error('balance')
+							<span class="text-danger">{{ $message }}</span>
+						@enderror
+					</div>
+					<div class="mb-3">
+						<label for="accountIcon">Icon</label>
+						<input wire:model="icon" type="file" class="form-control" id="accountIcon" placeholder="Enter account icon"
+							accept="image/*">
+						@error('icon')
 							<span class="text-danger">{{ $message }}</span>
 						@enderror
 					</div>
