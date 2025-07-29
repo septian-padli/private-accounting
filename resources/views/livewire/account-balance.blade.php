@@ -1,10 +1,10 @@
-<div class="d-flex justify-content-between gap-4">
+<div class="row g-4">
 	@foreach ($accounts as $account)
-		<div class="w-100">
-			<div class="card">
-				<div class="card-body py-4-5 px-4">
+		<div class="col-12 col-sm-6 d-flex {{ $isDashboard ? 'col-lg-4' : 'col-md-4 col-lg-3' }}">
+			<div class="card flex-fill mb-0">
+				<div class="card-body px-4 py-4">
 					<div class="d-flex gap-4">
-						<div class="">
+						<div>
 							<div class="stats-icon purple mb-2 p-1">
 								<img src="{{ asset('storage/' . $account->icon) }}" alt="{{ $account->icon }} Icon" class="img-fluid">
 							</div>

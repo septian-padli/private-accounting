@@ -4,8 +4,8 @@
 	<div class="page-content">
 		<section class="row">
 			<div class="col-12 col-lg-9">
-				@livewire('account-balance')
-				<div class="row">
+				@livewire('account-balance', ['isDashboard' => true])
+				<div class="row mt-4">
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">

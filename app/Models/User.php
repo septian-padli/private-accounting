@@ -62,11 +62,6 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class, 'user_id', 'id');
     }
 
-    public function monthlyBudgets()
-    {
-        return $this->hasMany(MonthlyBudget::class, 'user_id', 'id');
-    }
-
     public function family()
     {
         return $this->belongsTo(Family::class, 'family_id', 'id');

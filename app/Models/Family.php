@@ -38,4 +38,9 @@ class Family extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function monthlyBudgets()
+    {
+        return $this->hasMany(MonthlyBudget::class, 'family_id', 'id');
+    }
 }

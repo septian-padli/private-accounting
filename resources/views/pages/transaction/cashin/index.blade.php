@@ -2,7 +2,7 @@
 @section('page-title', 'Transaction Management')
 @section('content')
 	<div class="page-content">
-		<section class="row">
+		<section class="row row-gap-4">
 			<div class="col-12">
 				@livewire('account-balance')
 			</div>

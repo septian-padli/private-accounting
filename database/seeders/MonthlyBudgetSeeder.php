@@ -21,7 +21,7 @@ class MonthlyBudgetSeeder extends Seeder
         MonthlyBudget::factory()
             ->count(12)
             ->create([
-                'user_id' => $user->id,
+                'family_id' => $user->family_id,
                 'category_id' => $categories->random(),
             ]);
     }

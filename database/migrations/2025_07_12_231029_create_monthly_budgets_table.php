@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('monthly_budgets', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignUlid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('family_id')->constrained()->onDelete('cascade');
             $table->foreignUlid('category_id')->constrained()->onDelete('cascade');
             $table->decimal('amount', 15, 2);
             $table->unsignedSmallInteger('year');

@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class AccountBalance extends Component
 {
     public $accounts;
+    public $isDashboard = false;
 
     protected $listeners = ['transactionCreated' => 'refreshAccounts'];
 
-    public function mount()
+    public function mount($isDashboard = false)
     {
+        $this->isDashboard = $isDashboard;
         $this->refreshAccounts();
     }
 
@@ -24,6 +26,8 @@ class AccountBalance extends Component
 
     public function render()
     {
-        return view('livewire.account-balance');
+        return view('livewire.account-balance', [
+            'isDashboard' => $this->isDashboard,
+        ]);
     }
 }

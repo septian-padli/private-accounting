@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\MonthlyBudgetController;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
@@ -45,4 +46,6 @@ Route::middleware(['auth', CheckFamily::class])->group(function () {
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/cashout', [TransactionController::class, 'cashout'])->name('cashout.index');
     Route::get('/cashin', [TransactionController::class, 'cashin'])->name('cashin.index');
+
+    Route::get('/budget', [MonthlyBudgetController::class, 'index'])->name('budget.index');
 });

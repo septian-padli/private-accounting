@@ -63,8 +63,8 @@
 						</li>
 					</ul>
 				</li>
-				<li class="sidebar-item">
-					<a href="index.html" class="sidebar-link">
+				<li class="sidebar-item {{ request()->is('budget') ? 'active' : '' }}">
+					<a href="{{ route('budget.index') }}" class="sidebar-link">
 						<i class="fa fa-calendar-alt"></i>
 						<span>Monthly Plan</span>
 					</a>

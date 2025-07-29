@@ -17,7 +17,7 @@ class CreateAccount extends Component
 
     protected $rules = [
         'name' => 'required|string|max:255',
-        'number' => 'required|string|unique:accounts,number',
+        'number' => 'required|string|max:255',
         'balance' => 'numeric|nullable',
         'icon' => 'nullable|image|max:2048',
     ];
