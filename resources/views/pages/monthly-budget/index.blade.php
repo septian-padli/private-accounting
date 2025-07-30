@@ -2,7 +2,28 @@
 @section('page-title', 'Monthly Budget Management')
 @section('content')
 	<div class="page-content">
-		@livewire('budget.read-budget')
+		<section class="">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body py-4-5 px-4">
+							<div class="d-flex flex-column flex-md-row justify-content-between">
+								<h4 class="text-capitalize mb-md-0 mb-2">{{ $user->family->name }} Monthly Budget</h4>
+								<div>
+
+									<button type="button" class="edit btn btn-primary btn-sm" data-bs-toggle="modal"
+										data-bs-target="#createBudgetModal">
+										<i class="fa fa-user-plus me-2"></i>
+										Add Budget
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			@livewire('budget.read-budget')
+		</section>
 	</div>
 
 	@livewire('budget.create-budget')
@@ -20,6 +41,10 @@
 			// Ambil modal instance, jika belum ada buat baru
 			let modalEl = document.getElementById('createBudgetModal');
 			let modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+			modal.hide();
+
+			modalEl = document.getElementById('modalEditBudget');
+			modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
 			modal.hide();
 
 			// Hilangkan backdrop secara paksa jika masih ada

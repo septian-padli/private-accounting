@@ -55,9 +55,24 @@ class CreateBudget extends Component
 
     public function render()
     {
-        $categories = Category::where('family_id', Auth::user()->family_id)
-            ->where('type', 'EXPENSE')
-            ->get();
+        $query = Category::where('family_id', Auth::user()->family_id)
+            ->where('type', 'EXPENSE');
+
+        // Filter kategori yang sudah dipakai pada bulan & tahun yang dipilih
+        if ($this->month && $this->year) {
+            $usedCategoryIds = MonthlyBudget::where('family_id', Auth::user()->family_id)
+                ->where('month', $this->month)
+                ->where('year', $this->year)
+                ->pluck('category_id')
+                ->toArray();
+
+            if (!empty($usedCategoryIds)) {
+                $query->whereNotIn('id', $usedCategoryIds);
+            }
+        }
+
+        $categories = $query->get();
+
         return view('livewire.budget.create-budget', [
             'categories' => $categories,
             'months' => $this->months,

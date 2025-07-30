@@ -11,7 +11,7 @@
 					<div class="row gap-y-3">
 						<div class="col-md-6 col-12">
 							<label for="monthSelect">Month</label>
-							<select wire:model="month" class="form-control form-select" id="monthSelect" required>
+							<select wire:model.blur="month" class="form-control form-select" id="monthSelect" required>
 								<option value="">Select month</option>
 								@foreach ($months as $key => $value)
 									<option value="{{ $key }}">{{ $value }}</option>
@@ -24,8 +24,8 @@
 						<div class="col-md-6 col-12">
 							<label for="yearInput">Year</label>
 							<div class="form-group mb-0">
-								<input wire:model="year" type="number" class="form-control" placeholder="{{ date('Y') }}" id="yearInput"
-									required min="1900" max="2100">
+								<input wire:model.blur="year" type="number" class="form-control" placeholder="{{ date('Y') }}"
+									id="yearInput" required min="1900" max="2100">
 							</div>
 							@error('year')
 								<span class="text-danger text-sm">{{ $message }}</span>
@@ -33,7 +33,7 @@
 						</div>
 						<div class="col-md-6 col-12">
 							<label for="categorySelect">Category</label>
-							<select wire:model="category_id" class="form-control form-select" id="categorySelect" required>
+							<select wire:model.blur="category_id" class="form-control form-select" id="categorySelect" required>
 								<option value="">Select category</option>
 								@foreach ($categories as $cat)
 									<option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -46,8 +46,8 @@
 						<div class="col-md-6 col-12">
 							<label for="amountInput">Amount</label>
 							<div class="form-group position-relative has-icon-left mb-0">
-								<input wire:model.blur="amount" type="number" class="form-control" placeholder="Input with icon left"
-									id="amountInput" required>
+								<input wire:model.blur="amount" type="number" step="0.01" class="form-control"
+									placeholder="Input with icon left" id="amountInput" required>
 								<div class="form-control-icon">
 									<i class="fa-solid fa-rupiah-sign"></i>
 								</div>

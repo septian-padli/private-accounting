@@ -47,7 +47,7 @@ class MonthlyBudgetController extends Controller
                 ->make(true);
         }
 
-        return view('pages.monthly-budget.index');
+        return view('pages.monthly-budget.index', compact('user'));
     }
 
     /**
